@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: ORSProject03-mysql
+
+    restart: always
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: p03
+
+    ports:
+      - "3308:3306"
+
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+
+    networks:
+      - mynetwork
+
+  webapp:
+    build: .
+
+    container_name: ORSProject03-webapp
+
+    depends_on:
+      - mysql
+
+    ports:
+      - "8080:8080"
+
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
