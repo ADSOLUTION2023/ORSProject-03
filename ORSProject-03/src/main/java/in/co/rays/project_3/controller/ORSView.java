@@ -92,6 +92,14 @@ public interface ORSView {
 	public String CUSTOMER_LIST_VIEW = PAGE_FOLDER + "/CustomerListView.jsp";
 	
 
+	public String HOTEL_CTL = APP_CONTEXT + "/ctl/HotelCtl";
+	public String HOTEL_LIST_CTL = APP_CONTEXT + "/ctl/HotelListCtl";
+	public String HOTEL_VIEW = PAGE_FOLDER + "/HotelView.jsp";
+	public String HOTEL_LIST_VIEW = PAGE_FOLDER + "/HotelListView.jsp";
 	
+	public String PATIENT_CTL = APP_CONTEXT + "/ctl/PatientCtl";
+	public String PATIENT_LIST_CTL = APP_CONTEXT + "/ctl/PatientListCtl";
+	public String PATIENT_VIEW = PAGE_FOLDER + "/PatientView.jsp";
+	public String PATIENT_LIST_VIEW = PAGE_FOLDER + "/PatientListView.jsp";
 	
 }

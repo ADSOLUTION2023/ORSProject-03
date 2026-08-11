@@ -64,7 +64,7 @@ i.css {
 							<%
 								long id = DataUtility.getLong(request.getParameter("id"));
 
-								if (dto.getId() != null) {
+								if (dto.getName()!=null && dto.getId() != null) {
 							%>
 							<h3 class="text-center default-text text-primary">Update
 								Marksheet</h3>

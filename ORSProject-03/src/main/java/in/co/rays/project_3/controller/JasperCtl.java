@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.impl.SessionImpl;
 
 import in.co.rays.project_3.dto.UserDTO;
+import in.co.rays.project_3.util.DataUtility;
 import in.co.rays.project_3.util.HibDataSource;
 import in.co.rays.project_3.util.JDBCDataSource;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -41,6 +42,7 @@ public class JasperCtl extends BaseCtl {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		long id = DataUtility.getLong(request.getParameter("id"));
 		try {
 
 			/* Compilation of jrxml file */
@@ -58,7 +60,7 @@ public class JasperCtl extends BaseCtl {
 			dto.getLastName();
 
 			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("ID", 1l);
+			map.put("ID", id);
 			java.sql.Connection conn = null;
 
 			ResourceBundle rb = ResourceBundle.getBundle("in.co.rays.project_3.bundle.system");

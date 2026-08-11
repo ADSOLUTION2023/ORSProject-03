@@ -167,19 +167,59 @@ public final class ModelFactory {
 	}
 
 // Usecases
-public CustomerModelInt getCustomerModel() {
-	CustomerModelInt CustomerModel = (CustomerModelInt) modelCache.get("CustomerModel");
-	if (CustomerModel == null) {
-		if ("Hibernate".equals(DATABASE)) {
-			CustomerModel = new CustomerHibImpl();
-		}
+	public CustomerModelInt getCustomerModel() {
+		CustomerModelInt CustomerModel = (CustomerModelInt) modelCache.get("CustomerModel");
+		if (CustomerModel == null) {
+			if ("Hibernate".equals(DATABASE)) {
+				CustomerModel = new CustomerHibImpl();
+			}
 //		if ("JDBC".equals(DATABASE)) {
 //			CustomerModel = new CustomerModelJDBCImpl();
 //		}
-		modelCache.put("CustomerModel", CustomerModel);
+			modelCache.put("CustomerModel", CustomerModel);
+		}
+
+		return CustomerModel;
 	}
 
-	return CustomerModel;
-}
-}
+	public HotelModelInt getHotelModel() {
+		HotelModelInt hotelModel = (HotelModelInt) modelCache.get("HotelModel");
 
+	if(hotelModel==null)
+	{
+
+		if ("Hibernate".equals(DATABASE)) {
+			hotelModel = new HotelHibImpl();
+		}
+
+		// if ("JDBC".equals(DATABASE)) {
+		// hotelModel = new HotelModelJDBCImpl();
+		// }
+
+		modelCache.put("HotelModel", hotelModel);
+	}
+
+	return hotelModel;
+}
+	
+	public PatientModelInt getPatientModel() {
+
+	    PatientModelInt patientModel =
+	            (PatientModelInt) modelCache.get("PatientModel");
+
+	    if (patientModel == null) {
+
+	        if ("Hibernate".equals(DATABASE)) {
+	            patientModel = new PatientHibImpl();
+	        }
+
+	        // if ("JDBC".equals(DATABASE)) {
+	        //     patientModel = new PatientModelJDBCImpl();
+	        // }
+
+	        modelCache.put("PatientModel", patientModel);
+	    }
+
+	    return patientModel;
+	}
+}

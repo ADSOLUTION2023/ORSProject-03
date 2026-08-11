@@ -1,4 +1,4 @@
-\<%@page import="in.co.rays.project_3.controller.LoginCtl"%>
+<%@page import="in.co.rays.project_3.controller.LoginCtl"%>
 <%@page import="in.co.rays.project_3.controller.ORSView"%>
 <%@page import="in.co.rays.project_3.dto.RoleDTO"%>
 <%@page import="in.co.rays.project_3.dto.UserDTO"%>
@@ -205,17 +205,25 @@
 					</div></li>
 
 
-				 <!-- usercase -->
-				 
+				<!-- usercase -->
+
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
 					style="color: Green;">USECASES</a>
 					<div class="dropdown-menu">
-						 <a class="dropdown-item" href="<%=ORSView.CUSTOMER_CTL%>">
-						 <i class="fa fa-calculator"></i>Customer</a> 
-						 
-						<a class="dropdown-item" href="<%=ORSView.CUSTOMER_LIST_CTL%>">
-						<i class="fa fa-sort-amount-down"></i>Customer List</a>
+						<a class="dropdown-item" href="<%=ORSView.CUSTOMER_CTL%>"> <i
+							class="fa fa-calculator"></i>Customer
+						</a> <a class="dropdown-item" href="<%=ORSView.CUSTOMER_LIST_CTL%>">
+							<i class="fa fa-sort-amount-down"></i>Customer List
+						</a> <a class="dropdown-item" href="<%=ORSView.HOTEL_CTL%>"> <i
+							class="fa fa-plus"></i> Add Hotel
+						</a> <a class="dropdown-item" href="<%=ORSView.HOTEL_LIST_CTL%>">
+							<i class="fa fa-sort-amount-down"></i>Hotel List
+						</a><a class="dropdown-item" href="<%=ORSView.PATIENT_CTL%>"> <i
+							class="fa fa-plus"></i> Add Patient
+						</a> <a class="dropdown-item" href="<%=ORSView.PATIENT_LIST_CTL%>">
+							<i class="fa fa-sort-amount-down"></i>Patient List
+						</a>
 
 
 
@@ -230,11 +238,7 @@
 
 
 
-
-
-
-
-				<%-- <li class="nav-item dropdown"><a
+						<%-- <li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
 					style="color: white;">USECASES 2</a>
 					<div class="dropdown-menu">
@@ -276,7 +280,7 @@
  --%>
 
 
-				<%-- <li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
+						<%-- <li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
                         href="#" data-toggle="dropdown" style="color:white;">Watchlist</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="<%=ORSView.WATCHLIST_CTL%>"><i class="fa fa-calculator"></i>Watchlist</a>
@@ -311,7 +315,7 @@
                             <a class="dropdown-item" href="<%=ORSView.PROFILE_LIST_CTL%>"><i class="fa fa-sort-amount-down"></i>profile List</a>
                         </div></li> --%>
 
-				<%-- <li class="nav-item dropdown"><a
+						<%-- <li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
 					style="color: white;">Maintenance</a>
 
@@ -323,7 +327,7 @@
 						</a>
 					</div></li> --%>
 
-				<%-- <li class="nav-item dropdown"><a
+						<%-- <li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
 					style="color: white;">Client</a>
 
@@ -334,7 +338,7 @@
 							<i class="fa fa-sort-amount-down"></i> Client List
 						</a>
 					</div></li> --%>
-				<%-- 			<li class="nav-item dropdown"><a
+						<%-- 			<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
 					style="color: white;">shift</a>
 
@@ -345,7 +349,7 @@
 							<i class="fa fa-sort-amount-down"></i> shift List
 						</a>
 					</div></li> --%>
-				<%-- 	<li class="nav-item dropdown"><a
+						<%-- 	<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
 					style="color: white;"> Enrollment </a>
 
@@ -358,49 +362,48 @@
 					</div></li>
  --%>
 
-				<%
-					}
-				%>
-
-				<%
-					}
-				%>
-
-				<!-- ✅ WELCOME DROPDOWN -->
-				<li class="nav-item dropdown ml-3"><a
-					class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-						<span style="color: navy;"><b><%=welcomeMsg%></b></span>
-				</a>
-					<div class="dropdown-menu dropdown-menu-right">
-						<%
-							if (userLoggedIn) {
-						%>
-						<a class="dropdown-item"
-							href="<%=ORSView.LOGIN_CTL%>?operation=<%=LoginCtl.OP_LOG_OUT%>">
-							<i class="fa fa-sign-out-alt"></i> Logout
-						</a> <a class="dropdown-item" href="<%=ORSView.MY_PROFILE_CTL%>">
-							<i class="fa fa-user-tie"></i> My Profile
-						</a> <a class="dropdown-item" href="<%=ORSView.CHANGE_PASSWORD_CTL%>">
-							<i class="fa fa-edit"></i> Change Password
-						</a> <a class="dropdown-item" target="blank"
-							href="<%=ORSView.JAVA_DOC_VIEW%>"> <i class="fa fa-clone"></i>
-							Java Doc
-						</a>
-						<%
-							} else {
-						%>
-						<a class="dropdown-item" href="<%=ORSView.LOGIN_CTL%>"> <i
-							class="fa fa-sign-in-alt"></i> Login
-						</a> <a class="dropdown-item"
-							href="<%=ORSView.USER_REGISTRATION_CTL%>"> <i
-							class="fa fa-registered"></i> User Registration
-						</a>
 						<%
 							}
 						%>
-					</div></li>
 
+						<%
+							}
+						%>
 
+						<!-- ✅ WELCOME DROPDOWN -->
+						<li class="nav-item dropdown ml-3"><a
+							class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+								<span style="color: navy;"><b><%=welcomeMsg%></b></span>
+						</a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<%
+									if (userLoggedIn) {
+								%>
+								<a class="dropdown-item"
+									href="<%=ORSView.LOGIN_CTL%>?operation=<%=LoginCtl.OP_LOG_OUT%>">
+									<i class="fa fa-sign-out-alt"></i> Logout
+								</a> <a class="dropdown-item" href="<%=ORSView.MY_PROFILE_CTL%>">
+									<i class="fa fa-user-tie"></i> My Profile
+								</a> <a class="dropdown-item"
+									href="<%=ORSView.CHANGE_PASSWORD_CTL%>"> <i
+									class="fa fa-edit"></i> Change Password
+								</a> <a class="dropdown-item" target="blank"
+									href="<%=ORSView.JAVA_DOC_VIEW%>"> <i class="fa fa-clone"></i>
+									Java Doc
+								</a>
+								<%
+									} else {
+								%>
+								<a class="dropdown-item" href="<%=ORSView.LOGIN_CTL%>"> <i
+									class="fa fa-sign-in-alt"></i> Login
+								</a> <a class="dropdown-item"
+									href="<%=ORSView.USER_REGISTRATION_CTL%>"> <i
+									class="fa fa-registered"></i> User Registration
+								</a>
+								<%
+									}
+								%>
+							</div></li>
 			</ul>
 		</div>
 	</nav>

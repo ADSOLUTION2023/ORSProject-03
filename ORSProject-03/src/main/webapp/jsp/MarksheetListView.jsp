@@ -114,7 +114,8 @@
 						style="font-size: 17px" name="operation"
 						value="<%=MarksheetListCtl.OP_SEARCH%>">&emsp; <input
 						type="submit" class="btn btn-dark btn-md" style="font-size: 17px"
-						name="operation" value="<%=MarksheetListCtl.OP_RESET%>">
+						name="operation" value="<%=MarksheetListCtl.OP_RESET%>">&emsp;<a
+						href="<%=ORSView.JASPER_CTL%>?id=<%=dto.getId()%>"> Print </a>
 				</div>
 
 				<div class="col-sm-3"></div>

@@ -1,15 +1,19 @@
-<%@page import="in.co.rays.project_3.controller.CollegeCtl"%>
+<%@page import="in.co.rays.project_3.controller.HotelCtl"%>
+<%@page import="java.util.List"%>
+<%@page import="in.co.rays.project_3.controller.UserCtl"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="in.co.rays.project_3.util.HTMLUtility"%>
 <%@page import="in.co.rays.project_3.util.DataUtility"%>
 <%@page import="in.co.rays.project_3.util.ServletUtility"%>
+<%@page import="in.co.rays.project_3.controller.ORSView"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>College View</title>
+<title>Hotel view</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <style type="text/css">
 i.css {
 	border: 2px solid #8080803b;
@@ -18,49 +22,60 @@ i.css {
 	background-color: #ebebe0;
 }
 
-.p4 {
-	background-image: url('<%=ORSView.APP_CONTEXT%>/img/wallp.jpg');
+.input-group-addon {
+	box-shadow: 9px 8px 7px #001a33;
+}
+
+.hm {
+	background-image: url('<%=ORSView.APP_CONTEXT%>/img/wall.jpg');
 	background-repeat: no-repeat;
-	background-attachment: fixed; 
+	background-attachment: fixed;
 	background-size: cover;
 	padding-top: 75px;
-	
-	/* background-size: 100%; */ 
+
+	/* background-size: 100%; */
 }
 </style>
+
 </head>
-<body class="p4">
+
+<body class="hm">
 	<div class="header">
 		<%@include file="Header.jsp"%>
+		<%@include file="calendar.jsp"%>
 	</div>
 	<div>
 
 		<main>
-		<form action="<%=ORSView.COLLEGE_CTL%>" method="post">
-
-			<div class="row pt-3 pb-4">
+		<form action="<%=ORSView.HOTEL_CTL%>" method="post">
+			<jsp:useBean id="dto" class="in.co.rays.project_3.dto.HotelDTO"
+				scope="request"></jsp:useBean>
+			<div class="row pt-3">
 				<!-- Grid column -->
-				<jsp:useBean id="dto" class="in.co.rays.project_3.dto.CollegeDTO"
-					scope="request"></jsp:useBean>
 				<div class="col-md-4 mb-4"></div>
 				<div class="col-md-4 mb-4">
-					<div class="card">
+					<div class="card input-group-addon">
 						<div class="card-body">
+							<!-- ye code box create karta h -->
 							<%
 								long id = DataUtility.getLong(request.getParameter("id"));
 
-								if (dto.getName()!=null && dto.getId() != null) {
+								if (dto.getHotelName() != null && dto.getId() > 0) {
 							%>
-							<h3 class="text-center text-primary">Update College</h3>
+							<h3 class="text-center default-text text-primary">UPDATE
+								HOTEL</h3>
 							<%
 								} else {
 							%>
-							<h3 class="text-center text-primary">Add College</h3>
+							<h3 class="text-center default-text text-primary">ADD HOTEL</h3>
 							<%
 								}
 							%>
 							<!--Body-->
 							<div>
+								<%
+									List list = (List) request.getAttribute("roleList");
+								%>
 
 								<H4 align="center">
 									<%
@@ -98,109 +113,104 @@ i.css {
 								<input type="hidden" name="modifiedDatetime"
 									value="<%=DataUtility.getTimestamp(dto.getModifiedDatetime())%>">
 							</div>
+
 							<div class="md-form">
-								<span class="pl-sm-5"><b>Name</b><span
+
+								<span class="pl-sm-5"><b>Hotel Name</b> <span
 									style="color: red;">*</span></span> </br>
 								<div class="col-sm-12">
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<div class="input-group-text">
-												<i class="fa fa-university grey-text"
-													style="font-size: 1rem;"></i>
+												<i class="fa fa-building grey-text" style="font-size: 1rem;"></i>
 											</div>
 										</div>
-										<input type="text" name="name" class="form-control"
-											id="defaultForm-email" placeholder="Enter Name"
-											value="<%=DataUtility.getStringData(dto.getName())%>">
+										<input type="text" class="form-control" name="hotelName"
+											placeholder="Enter Hotel Name"
+											value="<%=DataUtility.getStringData(dto.getHotelName())%>">
 									</div>
 								</div>
-								<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("name", request)%></font></br>
-
-
-
-								<span class="pl-sm-5"><b>Address</b><span
+								<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("hotelName", request)%></font></br>
+								<span class="pl-sm-5"><b>Location</b> <span
 									style="color: red;">*</span></span> </br>
 								<div class="col-sm-12">
 									<div class="input-group">
 										<div class="input-group-prepend">
 											<div class="input-group-text">
-												<i class="fa fa-address-book grey-text"
+												<i class="fa fa-map-marker grey-text"
 													style="font-size: 1rem;"></i>
 											</div>
 										</div>
-										<input type="text" name="address" class="form-control"
-											placeholder="Enter Address"
-											value="<%=DataUtility.getStringData(dto.getAddress())%>">
+										<input type="text" class="form-control" name="location"
+											placeholder="Enter Location"
+											value="<%=DataUtility.getStringData(dto.getLocation())%>">
 									</div>
 								</div>
-								<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("address", request)%></font></br>
+								<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("location", request)%></font></br>
 
-
-								<span class="pl-sm-5"><b>State</b><span
+								<span class="pl-sm-5"><b>Rating</b> <span
 									style="color: red;">*</span></span> </br>
+
 								<div class="col-sm-12">
 									<div class="input-group">
+
 										<div class="input-group-prepend">
 											<div class="input-group-text">
-												<i class="fa fa-address-card grey-text"
-													style="font-size: 1rem;"></i>
+												<i class="fa fa-star grey-text" style="font-size: 1rem;"></i>
 											</div>
 										</div>
-										<input type="text" name="state" class="form-control"
-											placeholder="Enter State"
-											value="<%=DataUtility.getStringData(dto.getState())%>">
+
+										<%
+											HashMap<String, String> map = new HashMap<String, String>();
+
+											map.put("1", "Poor");
+											map.put("2", "Below Average");
+											map.put("3", "Average");
+											map.put("4", "Good");
+											map.put("5", "Excellent");
+
+											String htmlList = HTMLUtility.getList("rating", String.valueOf((int) dto.getRating()), map);
+										%>
+
+										<%=htmlList%>
+
 									</div>
 								</div>
-								<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("state", request)%></font></br>
 
-
-								<span class="pl-sm-5"><b>City</b><span
+								<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("rating", request)%>
+								</font></br> <span class="pl-sm-5"><b>Contact No.</b> <span
 									style="color: red;">*</span></span> </br>
+
 								<div class="col-sm-12">
 									<div class="input-group">
-										<div class="input-group-prepend">
-											<div class="input-group-text">
-												<i class="fa fa-address-card grey-text"
-													style="font-size: 1rem;"></i>
-											</div>
-										</div>
-										<input type="text" name="city" class="form-control"
-											placeholder="Enter City"
-											value="<%=DataUtility.getStringData(dto.getCity())%>">
-									</div>
-								</div>
-								<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("city", request)%></font><br>
 
-
-								<span class="pl-sm-5"><b>Mobile No</b><span
-									style="color: red;">*</span></span> </br>
-								<div class="col-sm-12">
-									<div class="input-group">
 										<div class="input-group-prepend">
 											<div class="input-group-text">
 												<i class="fa fa-phone grey-text" style="font-size: 1rem;"></i>
 											</div>
 										</div>
-										<input type="text" class="form-control" name="mobileNo"
-											placeholder="Enter MobileNo" maxlength="10"
-											value="<%=DataUtility.getStringData(dto.getPhoneNo())%>">
+
+										<input type="text" class="form-control" name="contactNo"
+											placeholder="Enter Contact Number"
+											value="<%=DataUtility.getStringData(dto.getContactNo())%>">
+
 									</div>
 								</div>
-								<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("mobileNo", request)%></font></br>
 
-
-							</div>
-							</br>
-							<%
-								if (id > 0) {
+								<font color="red" class="pl-sm-5"> <%=ServletUtility.getErrorMessage("contactNo", request)%>
+								</font></br>
+								<%
+							if (dto.getHotelName()!=null && dto.getId() > 0) {
 							%>
+
 							<div class="text-center">
 
-								<input type="submit" name="operation"
-									class="btn btn-success btn-md" style="font-size: 17px"
-									value="<%=CollegeCtl.OP_UPDATE%>"> <input type="submit"
-									name="operation" class="btn btn-warning btn-md"
-									style="font-size: 17px" value="<%=CollegeCtl.OP_CANCEL%>">
+								<input type="submit" name="operation" class="btn btn-success btn-md" 
+								       style="font-size: 17px" 
+								       value="<%=HotelCtl.OP_UPDATE%>"> 
+								<input type="submit" name="operation" class="btn btn-warning btn-md"
+									   style="font-size: 17px" 
+									   value="<%=HotelCtl.OP_CANCEL%>">
 							</div>
 							<%
 								} else {
@@ -208,23 +218,24 @@ i.css {
 							<div class="text-center">
 
 								<input type="submit" name="operation"
-									class="btn btn-success btn-md" style="font-size: 17px"
-									value="<%=CollegeCtl.OP_SAVE%>"> <input type="submit"
-									name="operation" class="btn btn-warning btn-md"
-									style="font-size: 17px" value="<%=CollegeCtl.OP_RESET%>">
+									   class="btn btn-success btn-md" style="font-size: 17px"
+									   value="<%=HotelCtl.OP_SAVE%>"> 
+								<input type="submit" name="operation" 
+								       class="btn btn-warning btn-md"
+									   style="font-size: 17px" value="<%=HotelCtl.OP_RESET%>">
 							</div>
-							<%
+								<%
 								}
-							%>
+								%>
+						
+
 						</div>
+					
 					</div>
 				</div>
-				<div class="col-md-4 mb-4"></div>
-			</div>
-
 		</form>
 		</main>
-
+          	<div class="col-md-4 mb-4"></div>
 
 	</div>
 

@@ -1,11 +1,12 @@
+<%@page import="in.co.rays.project_3.controller.HotelCtl"%>
 <%@page import="in.co.rays.project_3.controller.MarksheetListCtl"%>
 <%@page import="in.co.rays.project_3.controller.ORSView"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="in.co.rays.project_3.model.ModelFactory"%>
-<%@page import="in.co.rays.project_3.dto.CustomerDTO"%>
+<%@page import="in.co.rays.project_3.dto.HotelDTO"%>
 <%@page import="in.co.rays.project_3.util.DataUtility"%>
-<%@page import="in.co.rays.project_3.controller.CustomerListCtl"%>
+<%@page import="in.co.rays.project_3.controller.HotelListCtl"%>
 <%@page import="in.co.rays.project_3.util.HTMLUtility"%>
 <%@page import="in.co.rays.project_3.util.ServletUtility"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -15,7 +16,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Customer List</title>
+<title>Hotel List</title>
 <script src="<%=ORSView.APP_CONTEXT%>/js/jquery.min.js"></script>
 <script type="text/javascript"
 	src="<%=ORSView.APP_CONTEXT%>/js/CheckBox11.js"></script>
@@ -45,9 +46,8 @@
 <%@include file="Header.jsp"%>
 <body class="hm">
 	<div>
-		<form class="pb-5" action="<%=ORSView.CUSTOMER_LIST_CTL%>"
-			method="post">
-			<jsp:useBean id="dto" class="in.co.rays.project_3.dto.CustomerDTO"
+		<form class="pb-5" action="<%=ORSView.HOTEL_LIST_CTL%>" method="post">
+			<jsp:useBean id="dto" class="in.co.rays.project_3.dto.HotelDTO"
 				scope="request"></jsp:useBean>
 
 			<%
@@ -57,14 +57,14 @@
 				int nextPageSize = DataUtility.getInt(request.getAttribute("nextListSize").toString());
 
 				List list = ServletUtility.getList(request);
-				Iterator<CustomerDTO> it = list.iterator();
+				Iterator<HotelDTO> it = list.iterator();
 
 				if (list.size() != 0) {
 			%>
 
 			<center>
 				<h1 class="text-dark font-weight-bold pt-3">
-					<font color="blue">Customer List</font>
+					<font color="blue">Hotel List</font>
 				</h1>
 			</center>
 
@@ -125,28 +125,28 @@
 
 				<div class="col-sm-2"></div>
 
-				<span><b>Account No :</b></span>
+				<span><b>Hotel Name :</b></span>
 
 				<div class="col-sm-2">
-					<input class="form-control" type="text" name="accountNo"
-						placeholder="Enter Account No"
-						value="<%=ServletUtility.getParameter("accountNo", request)%>">
+					<input class="form-control" type="text" name="hotelName"
+						placeholder="Enter Hotel Name"
+						value="<%=ServletUtility.getParameter("hotelName", request)%>">
 				</div>
 
-				<span><b>Name :</b></span>
+				<span><b>Location:</b></span>
 
 				<div class="col-sm-2">
-					<input class="form-control" type="text" name="name"
-						placeholder="Enter Name"
-						value="<%=ServletUtility.getParameter("name", request)%>">
+					<input class="form-control" type="text" name="location"
+						placeholder="Enter location"
+						value="<%=ServletUtility.getParameter("location", request)%>">
 				</div>
 
 				<div class="col-sm-2">
 					<input type="submit" class="btn btn-primary btn-md"
 						style="font-size: 17px" name="operation"
-						value="<%=CustomerListCtl.OP_SEARCH%>">&emsp; <input
+						value="<%=HotelListCtl.OP_SEARCH%>">&emsp; <input
 						type="submit" class="btn btn-dark btn-md" style="font-size: 17px"
-						name="operation" value="<%=CustomerListCtl.OP_RESET%>"> 	
+						name="operation" value="<%=HotelListCtl.OP_RESET%>">
 				</div>
 
 			</div>
@@ -166,11 +166,12 @@
 
 							<th>S.No</th>
 
-							<th>Account No</th>
+							<th>Hotel Name</th>
 
-							<th>Name</th>
+							<th>Location</th>
 
-							<th>Balance</th>
+							<th>Ratings</th>
+							<th>Contact No.</th>
 
 							<th>Edit</th>
 
@@ -193,13 +194,14 @@
 
 							<td><%=index++%></td>
 
-							<td><%=dto.getAccountNo()%></td>
+							<td><%=dto.getHotelName()%></td>
 
-							<td><%=dto.getName()%></td>
+							<td><%=dto.getLocation()%></td>
 
-							<td><%=dto.getBalance()%></td>
+							<td><%=dto.getRating()%></td>
 
-							<td><a href="<%=ORSView.CUSTOMER_CTL%>?id=<%=dto.getId()%>">
+							<td><%=dto.getContactNo()%></td>
+							<td><a href="<%=ORSView.HOTEL_CTL%>?id=<%=dto.getId()%>">
 
 									Edit </a></td>
 
@@ -218,26 +220,21 @@
 			<table width="100%">
 
 				<tr>
-
 					<td><input type="submit" name="operation"
-						class="btn btn-secondary btn-md"
-						value="<%=CustomerListCtl.OP_PREVIOUS%>"
+						class="btn btn-warning btn-md" style="font-size: 17px"
+						value="<%=HotelListCtl.OP_PREVIOUS%>"
 						<%=pageNo > 1 ? "" : "disabled"%>></td>
-
 					<td><input type="submit" name="operation"
-						class="btn btn-primary btn-md" value="<%=CustomerListCtl.OP_NEW%>">
-
-					</td>
-
+						class="btn btn-primary btn-md" style="font-size: 17px"
+						value="<%=HotelListCtl.OP_NEW%>"></td>
 					<td><input type="submit" name="operation"
-						class="btn btn-danger btn-md"
-						value="<%=CustomerListCtl.OP_DELETE%>"></td>
+						class="btn btn-danger btn-md" style="font-size: 17px"
+						value="<%=HotelListCtl.OP_DELETE%>"></td>
 
 					<td align="right"><input type="submit" name="operation"
-						class="btn btn-secondary btn-md"
-						value="<%=CustomerListCtl.OP_NEXT%>"
+						class="btn btn-warning btn-md" style="font-size: 17px"
+						style="padding: 5px;" value="<%=HotelListCtl.OP_NEXT%>"
 						<%=(nextPageSize != 0) ? "" : "disabled"%>></td>
-
 				</tr>
 
 			</table>
@@ -248,7 +245,7 @@
 
 			<center>
 
-				<h1 style="color: white">Customer List</h1>
+				<h1 style="color: white">Hotel List</h1>
 
 			</center>
 
@@ -263,7 +260,7 @@
 				</h3>
 
 				<input type="submit" name="operation" class="btn btn-primary"
-					value="<%=CustomerListCtl.OP_BACK%>">
+					value="<%=HotelListCtl.OP_BACK%>">
 
 			</div>
 
