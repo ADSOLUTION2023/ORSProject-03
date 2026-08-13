@@ -222,4 +222,24 @@ public final class ModelFactory {
 
 	    return patientModel;
 	}
+	public BookModelInt getBookModel() {
+
+	    BookModelInt bookModel =
+	            (BookModelInt) modelCache.get("BookModel");
+
+	    if (bookModel == null) {
+
+	        if ("Hibernate".equals(DATABASE)) {
+	            bookModel = new BookHibImpl();
+	        }
+
+	        // if ("JDBC".equals(DATABASE)) {
+	        //     bookModel = new BookModelJDBCImpl();
+	        // }
+
+	        modelCache.put("BookModel", bookModel);
+	    }
+
+	    return bookModel;
+	}
 }

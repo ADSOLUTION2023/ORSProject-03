@@ -223,7 +223,13 @@
 							class="fa fa-plus"></i> Add Patient
 						</a> <a class="dropdown-item" href="<%=ORSView.PATIENT_LIST_CTL%>">
 							<i class="fa fa-sort-amount-down"></i>Patient List
-						</a>
+						</a><a class="dropdown-item" href="<%=ORSView.BOOK_CTL%>"> <i
+                            class="fa fa-plus"></i> Add Book
+                        </a> <a class="dropdown-item" href="<%=ORSView.BOOK_LIST_CTL%>">
+                            <i class="fa fa-sort-amount-down"></i>Book List
+                        </a>
+						
+						
 
 
 
