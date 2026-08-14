@@ -129,7 +129,7 @@ public class BookCtl extends BaseCtl {
 		                dto.setId(pk);
 		                ServletUtility.setSuccessMessage("Book is successfully added", request);
 		            }
-
+		            System.out.println("BookCtl doPost Completed");
 		            ServletUtility.setDto(dto, request);
 
 		        } catch (DuplicateRecordException e) {

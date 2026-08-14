@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import in.co.rays.project_3.dto.BookDTO;
+import in.co.rays.project_3.dto.CustomerDTO;
 import in.co.rays.project_3.exception.ApplicationException;
 import in.co.rays.project_3.exception.DuplicateRecordException;
 import in.co.rays.project_3.util.HibDataSource;
@@ -17,45 +18,34 @@ import in.co.rays.project_3.util.HibDataSource;
 public class BookHibImpl implements BookModelInt{
 	@Override
 	public long add(BookDTO dto) throws ApplicationException, DuplicateRecordException {
+		
+		Session session = null;
+		Transaction tx = null;
+		BookDTO existDto = null;
+		existDto = findByTitle(dto.getTitle());
+		if (existDto != null) {
+			throw new DuplicateRecordException("Book with Title already exist");
+		}
+		 session = HibDataSource.getSession();
+		try {
 
-	    Session session = null;
-	    Transaction tx = null;
+			int pk = 0;
+			tx = session.beginTransaction();
 
-	    BookDTO existDto = findByTitle(dto.getTitle());
+			session.save(dto);
 
-	    if (existDto != null) {
-	        throw new DuplicateRecordException("Title already exists");
-	    }
+			tx.commit();
 
-	    session = HibDataSource.getSession();
-
-	    try {
-
-	        tx = session.beginTransaction();
-
-	        session.save(dto);
-
-	        tx.commit();
-
-	    } catch (HibernateException e) {
-
-	        if (tx != null) {
-	            tx.rollback();
-	        }
-
-	        e.printStackTrace();
-
-	        throw new ApplicationException(
-	                "Exception in Book Add " + e.getMessage());
-
-	    } finally {
-
-	        if (session != null) {
-	            session.close();
-	        }
-	    }
-
-	    return dto.getId();
+		} catch (HibernateException e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			throw new ApplicationException("Exception in Book Add " + e.getMessage());
+		} finally {
+			session.close();
+		}
+		/* log.debug("Model add End"); */
+		return dto.getId();
 	}
 	@Override
 	public void delete(BookDTO dto) throws ApplicationException {
@@ -113,7 +103,7 @@ public class BookHibImpl implements BookModelInt{
 	        session = HibDataSource.getSession();
 
 	        Criteria criteria = session.createCriteria(BookDTO.class);
-	        criteria.add(Restrictions.eq("Title", Title));
+	        criteria.add(Restrictions.eq("title", Title));
 
 	        return (BookDTO) criteria.uniqueResult();
 
@@ -164,9 +154,10 @@ public class BookHibImpl implements BookModelInt{
 			Criteria criteria = session.createCriteria(BookDTO.class);
 			if (dto != null) {
 				
-				 if (dto.getId() != null) { criteria.add(Restrictions.like("id",
-				 dto.getId())); 
-				 }
+				/*
+				 * if (dto.getId() != null) { criteria.add(Restrictions.like("id",
+				 * dto.getId())); }
+				 */
 				 
 				if (dto.getTitle() != null && dto.getTitle().length() > 0) {
 				    criteria.add(Restrictions.like("title", dto.getTitle() + "%"));
