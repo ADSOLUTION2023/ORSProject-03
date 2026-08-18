@@ -84,7 +84,7 @@ public class LoginCtl extends BaseCtl {
 		long id = DataUtility.getLong(request.getParameter("id"));
 
 		if (OP_LOG_OUT.equals(op)) {
-			session = request.getSession();
+			//session = request.getSession();
 			session.invalidate();
 			ServletUtility.setSuccessMessage("User Logged Out Successfully!", request);
 			ServletUtility.forward(ORSView.LOGIN_VIEW, request, response);
