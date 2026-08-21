@@ -124,10 +124,12 @@ public class BookCtl extends BaseCtl {
 		            if (id > 0) {
 		                model.update(dto);
 		                ServletUtility.setSuccessMessage("Book is successfully updated", request);
+		                ServletUtility.setDto(dto, request);
 		            } else {
 		                long pk = model.add(dto);
 		                dto.setId(pk);
 		                ServletUtility.setSuccessMessage("Book is successfully added", request);
+		                ServletUtility.setDto(dto, request);
 		            }
 		            System.out.println("BookCtl doPost Completed");
 		            ServletUtility.setDto(dto, request);

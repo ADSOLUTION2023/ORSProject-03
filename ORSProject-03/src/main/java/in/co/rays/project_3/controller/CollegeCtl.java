@@ -123,12 +123,14 @@ public class CollegeCtl extends BaseCtl {
 					ServletUtility.setDto(dto, request);
 					
 					ServletUtility.setSuccessMessage("Record Successfully Updated", request);
+					ServletUtility.setDto(dto, request);
 
 				} else {
 					System.out.println("college add" + dto + "id...." + id);
 					//long pk 
 							model.add(dto);
 					ServletUtility.setSuccessMessage("Record Successfully Saved", request);
+					ServletUtility.setDto(dto, request);
 				}
 				//ServletUtility.setDto(dto, request);
 			} catch (ApplicationException e) {

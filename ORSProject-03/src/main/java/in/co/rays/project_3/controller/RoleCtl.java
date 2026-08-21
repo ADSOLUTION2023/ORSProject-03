@@ -105,6 +105,10 @@ public class RoleCtl extends BaseCtl {
 						//long pk = 
 								model.add(dto);
 						ServletUtility.setSuccessMessage("Successfully Saved", request);
+						   // Added data ko form me retain karne ke liye
+						dto.setId(0L);
+				        ServletUtility.setDto(dto, request);
+					
 					} catch (ApplicationException e) {
 						log.error(e);
 						ServletUtility.handleDBDown(getView(), request, response);

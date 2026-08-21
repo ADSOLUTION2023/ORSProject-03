@@ -140,6 +140,7 @@ public class LoginCtl extends BaseCtl {
 						} else {
 							ServletUtility.redirect(ORSView.WELCOME_CTL, request, response);
 						}
+						ServletUtility.setDto(dto, request);
 
 
 						return;

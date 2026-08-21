@@ -116,10 +116,12 @@ public class CustomerCtl extends BaseCtl {
 	            if (id > 0) {
 	                model.update(dto);
 	                ServletUtility.setSuccessMessage("Customer is successfully updated", request);
+	                ServletUtility.setDto(dto, request);
 	            } else {
 	                long pk = model.add(dto);
 	                dto.setId(pk);
 	                ServletUtility.setSuccessMessage("Customer is successfully added", request);
+	                ServletUtility.setDto(dto, request);
 	            }
 
 	            ServletUtility.setDto(dto, request);

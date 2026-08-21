@@ -131,6 +131,7 @@ public class SubjectCtl extends BaseCtl {
 					try{
 					pk=	model.add(dto);
 						ServletUtility.setSuccessMessage("Data in successfully saved", request);
+						ServletUtility.setDto(dto, request);
 					}catch (ApplicationException e) {
 						log.error(e);
 						ServletUtility.handleDBDown(getView(), request, response);

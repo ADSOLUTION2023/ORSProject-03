@@ -191,6 +191,7 @@ public class StudentCtl extends BaseCtl {
 					try {
 						model.add(dto);
 						ServletUtility.setSuccessMessage("Data is successfully saved", request);
+						ServletUtility.setDto(dto, request);
 					} catch (ApplicationException e) {
 						log.error(e);
 						ServletUtility.handleDBDown(getView(), request, response);

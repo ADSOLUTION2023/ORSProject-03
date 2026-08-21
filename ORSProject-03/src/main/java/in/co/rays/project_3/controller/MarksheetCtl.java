@@ -181,6 +181,7 @@ public class MarksheetCtl extends BaseCtl {
 				} else {
 					model.add(dto);
 					ServletUtility.setSuccessMessage("Data is successfully saved", request);
+					ServletUtility.setDto(dto, request);
 				}
 				//
 

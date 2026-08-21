@@ -135,10 +135,12 @@ public class PatientCtl extends BaseCtl {
 		            if (id > 0) {
 		                model.update(dto);
 		                ServletUtility.setSuccessMessage("Patient is successfully updated", request);
+		                ServletUtility.setDto(dto, request);
 		            } else {
 		                long pk = model.add(dto);
 		                dto.setId(pk);
 		                ServletUtility.setSuccessMessage("Patient is successfully added", request);
+		                ServletUtility.setDto(dto, request);
 		                ServletUtility.forward(getView(), request, response);
 		            }
 
